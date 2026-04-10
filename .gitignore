@@ -1,2 +1,4 @@
 codice_note
 .DS_Store
+.env
+Assignments/1-LCS/data/__pycache__
