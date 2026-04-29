@@ -90,7 +90,7 @@ int main () {
     
     std::string input = "out";
     s = readFile(PATH + input + ".txt");
-
+    std::cout << "\nDimensione array C++ in memoria: " << s.size() << "\n\n";
     x = iter_lvqs(s, K);
     
     std::string output = "in";
