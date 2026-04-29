@@ -11,14 +11,14 @@ output array con numero di confronti per iterazione
 
 const std::string PATH = "../data/"; // Relative path
 
-// returns a vector of int
-std::vector<std::string> readFile (std::string fileName) {
-    std::vector<std::string> s;
+// returns a vector<int>
+std::vector<int> readFile (std::string fileName) {
+    std::vector<int> s;
 
     std::ifstream file_in(fileName);
-    if (!file_in) {std::cerr << "Error opening file\n"; exit(-1);} // kills the process
+    if (!file_in) {std::cerr << "Error opening file" << fileName << "\n"; return s;} // Error handling
 
-    std::string n;
+    int n;
     while (file_in >> n) {
         s.push_back(n);
     }
@@ -26,16 +26,30 @@ std::vector<std::string> readFile (std::string fileName) {
     file_in.close();
     return s;
 }
+// writes onto file
+void outFile (std::string fileName, std::vector<int> s) {
+    std::ofstream file_out(fileName);
+    if (!file_out) {std::cerr << "Error opening file" << fileName << "\n"; return;} // Error handling
+
+    for (size_t i = 0; i < s.size(); i++) {
+        file_out << s.at(i) << "\n";
+    }
+
+    file_out.close();
+}
 
 int main () {
-    std::vector<std::string> s;
+    std::vector<int> s;
     
-    std::string fileName = "out";
-    s = readFile(PATH + fileName + ".txt");
+    std::string input = "out";
+    s = readFile(PATH + input + ".txt");
 
-    for (unsigned int i = 0; i < s.size(); i++) {
+    for (size_t i = 0; i < s.size(); i++) {
         std::cout << s.at(i) << " ";
     }
     
+    std::string output = "in";
+    outFile(PATH + output + ".txt", s);
+
     return 0;
 }
